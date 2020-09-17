@@ -102,7 +102,7 @@ mctsNode get_node(const Position& pos, bool createMode) {
    infos.lastMove         = MOVE_NONE; // the move between the parent and this node
    infos.ABmove = MOVE_NONE;
    infos.ttValue = VALUE_NONE;
-   infos.deep = 1;
+   infos.deep = 4;
 
 //   debug << "inserting into the hash table: key = " << key1 << endl;
 
@@ -129,7 +129,7 @@ Move MonteCarlo::search() {
 	   {
 		   Depth deep = std::min(node->deep, mctsDepth);
 		   if(deep >= mctsDepth)
-			   std::min(node->deep, mctsDepth+20);
+			   std::min(node->deep, mctsDepth+10);
 		//   deep = std::min(node->deep, maximumPly);
 		   value = evaluate_with_minimax(deep, node);
 		   node->lock.acquire();
@@ -236,7 +236,7 @@ mctsNode MonteCarlo::tree_policy() {
         if (is_terminal(current_node()))
             return current_node();
 		if(!is_root(current_node())
-			&& current_node()->deep <= mctsDepth
+			&& current_node()->deep <= mctsDepth+10
 			)
 		{
 			current_node()->lock.acquire();
