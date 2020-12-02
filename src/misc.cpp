@@ -209,7 +209,7 @@ const string engine_info(bool to_uci) {
   string month, day, year;
   stringstream ss, date(__DATE__); // From compiler, format is "Sep 21 2008"
 
-  ss << "BrainLearn MCTS " << Version << setfill('0');
+  ss << "BrainLearn MCTS NNUE " << Version << setfill('0');
 
   if (Version.empty())
   {
